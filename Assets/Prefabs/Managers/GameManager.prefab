@@ -9,17 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1276541520415378}
+  m_RootGameObject: {fileID: 1105611607825934}
   m_IsPrefabAsset: 1
---- !u!1 &1276541520415378
+--- !u!1 &1105611607825934
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4550836915271598}
-  - component: {fileID: 114401568733408276}
+  - component: {fileID: 4935317628045370}
+  - component: {fileID: 114786710091972458}
+  - component: {fileID: 114386598060540400}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -27,12 +28,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4550836915271598
+--- !u!4 &4935317628045370
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1276541520415378}
+  m_GameObject: {fileID: 1105611607825934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,30 +41,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114401568733408276
+--- !u!114 &114386598060540400
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1276541520415378}
+  m_GameObject: {fileID: 1105611607825934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6cac86f320b1f4bbcbd9df7115b0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemKeyList: 01000000020000006500000066000000
+  itemObjects:
+  - {fileID: 1148344418592178, guid: 1ab3c693bf8879a42b0b65b195bb2c55, type: 2}
+  - {fileID: 1717489710083698, guid: 802d8cc334eecef4e9373646399081e5, type: 2}
+  - {fileID: 1867576154787072, guid: d5ed8c0b845dcab4d8cca64e88802d36, type: 2}
+  - {fileID: 1298021191043474, guid: c8d45654633bf8e4d909d47f7dd510e3, type: 2}
+--- !u!114 &114786710091972458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105611607825934}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57eadf13d8785084191dd234bcbdaa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  maincamera: {fileID: 0}
-  managerlist:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  managers:
-  - {fileID: 0}
-  - {fileID: 1956113290291826, guid: 977f0e0cc5dba1045bdb683771eb2673, type: 2}
-  - {fileID: 1428512059579398, guid: 472c3f03ebff0784ab15e08cdcc633a2, type: 2}
-  - {fileID: 1541169018387006, guid: a868f25b462f3b748afe0fbcc2687d25, type: 2}
-  - {fileID: 1586732269668908, guid: b8f27e1908c9b254695ab51b8e2942b5, type: 2}
-  - {fileID: 1234297349537688, guid: 8ef939afcbe513a4ba77a34994bf66c7, type: 2}
+  itemBox: {fileID: 114386598060540400}
+  managerKeys:
+  - GUIManager
+  - SoundManager
+  managerValues:
+  - {fileID: 114790143594569726, guid: 6d7df2091022aa04caf0734929cb8e76, type: 2}
+  - {fileID: 114396566685072910, guid: 59c78d3ebb4879549a68e29310066323, type: 2}
+  goldCoin: 1000000
+  slimeCoin: 1000000
+  buyItemKeys: 
+  stageBox: 
+  nowPlayingScnenName: MainMenu
+  myData:
+    MyGameData:
+      goldCoin: 0
+      slimeCoin: 0
+      buyItemKeys: 
+  buyingItemSpown: {x: 0, y: 0, z: 0}
+  outerWorld: {x: 0, y: -300, z: 0}
