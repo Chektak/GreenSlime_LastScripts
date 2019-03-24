@@ -24,14 +24,6 @@ public class Weapon_SlimeGun : Item {
         StartCoroutine(ShotCoolTime(0.5f));
     }
 
-    protected override void OnCollisionEnter2D(Collision2D coll)
-    {
-        base.OnCollisionEnter2D(coll);
-        if (coll.gameObject.tag == "Player")
-        {
-            gameObject.GetComponent<Collider2D>().enabled = false;
-        }
-    }
 
     IEnumerator ShotCoolTime(float cool)
     {

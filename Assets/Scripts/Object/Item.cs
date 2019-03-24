@@ -6,19 +6,32 @@ public class Item : MonoBehaviour {//모든 item들의 부모클래스이다.
     public string ItemTag = "Item";
     public string itemName;
     public int itemKey;
-    public string itemTooltipText = "Name : tip : ";
+    public string itemTooltipText = "이름 : 정보 : ";
     public float itemDamage = 1;
     public float knockback = 0;
     public AudioClip itemUseSoundEffect;
-    private SpriteRenderer itemRenderer;//Inventory GUI에서 쓸 렌더러이다.
+    protected ObjItem objItem;
+    protected SpriteRenderer itemRenderer;//Inventory GUI에서 쓸 렌더러이다.
+
     // Use this for initialization
     protected virtual void Awake() { //virtual : 자식클래스에서 재정의안해도된다.
         itemRenderer = GetComponent<SpriteRenderer>();
 	}
 
-    private void Start()
+    protected virtual void Start()
     {
+        objItem = GetComponent<ObjItem>();
         gameObject.tag = ItemTag;
+    }
+
+    protected virtual void Update()
+    {
+        if (objItem.isEnable == false)
+        {
+            transform.position = PlayerManager.Player.ReturnInventoryscript().itemHold.transform.position;
+            objItem.naturalColl.isTrigger = true;
+        }
+        
     }
 
     /// <summary>
@@ -77,12 +90,28 @@ public class Item : MonoBehaviour {//모든 item들의 부모클래스이다.
         return GetComponent<ObjItem>();
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D coll)
+    /*밑의 함수들은 유니티이벤트가 아니라 Item클래스 자식이 쓰는 함수***************************************/
+
+    protected void CollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Enemy"&&this.gameObject.tag=="Weapon")
+        if (coll.gameObject.tag == "Enemy")
         {
-            Unit unit = coll.gameObject.GetComponent<Unit>();
-            Enemy enemy = (Enemy)unit;
+            Enemy enemy= coll.gameObject.GetComponent<Enemy>();
+            float directionX = transform.position.x - PlayerManager.Player.transform.position.x;
+            Vector2 direction = new Vector2(directionX, 0);
+            direction.Normalize();
+            direction += new Vector2(0, 1.5f);
+            enemy.rgd.AddForce(direction * enemy.rgd.mass * knockback);
+            enemy.thisHealth.Health -= itemDamage;
+            enemy.U_A_S = Enemy.UnitActionState.PROTECT;
+        }
+    }
+
+    protected void TriggerStay2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Enemy")
+        {
+            Enemy enemy = coll.gameObject.GetComponent<Enemy>();
             float directionX = transform.position.x - PlayerManager.Player.transform.position.x;
             Vector2 direction = new Vector2(directionX, 0);
             direction.Normalize();

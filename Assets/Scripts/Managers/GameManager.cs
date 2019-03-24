@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public MySaveData myData = new MySaveData();
 
     public Vector3 buyingItemSpown=new Vector3(0,0,0);
-    public Vector3 outerWorld;
+    //public Vector3 outerWorld;
     public static GameManager Instance
     {
         get
@@ -140,6 +140,40 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 게임데이터를 삭제할 때 사용되는 함수이다.
+    /// </summary>
+    public void DeleteGameData()
+    {
+        for (int outsideIndex = 1; outsideIndex < stageBox.Length + 1; outsideIndex++)
+        {
+            Dictionary<int, bool> insideStageLockedInfo = new Dictionary<int, bool>();
+            for (int insideIndex = 1; insideIndex < (stageBox[outsideIndex - 1]) + 1; insideIndex++)
+            {//스테이지마다 내부스테이지 갯수가 다를 수 있으므로 for문을 두번돌리고 배열을 사용했다.
+                if (outsideIndex == 1 && insideIndex == 1)
+                {
+                    insideStageLockedInfo.Add(insideIndex, false);//첫번째 스테이지는 무조건 열려있어야한다.
+                    continue;//첫번째 스테이지에 대한 설정은 이미 완료했다.
+                }
+                insideStageLockedInfo.Add(insideIndex, true);
+            }
+            isStageLocked[outsideIndex]= insideStageLockedInfo; ;//스테이지 잠금에 대한 딕셔너리값 추가
+        }
+
+        for (int outsideIndex = 1; outsideIndex < stageBox.Length + 1; outsideIndex++)
+        {
+            Dictionary<int, bool> insideStageCanGetSlimeCoinInfo = new Dictionary<int, bool>();
+            for (int insideIndex = 1; insideIndex < stageBox[outsideIndex - 1] + 1; insideIndex++)
+            {//스테이지마다 내부스테이지 갯수가 다를 수 있으므로 for문을 두번돌리고 배열을 사용했다.
+                insideStageCanGetSlimeCoinInfo.Add(insideIndex, true);
+            }
+            canAddSlimeCoin[outsideIndex]=insideStageCanGetSlimeCoinInfo;//스테이지에서 Slime코인을 얻을 수 있는지에 대한 딕셔너리값 추가
+        }
+
+        buyItemKeys.Clear();
+        goldCoin = 0;
+        slimeCoin = 0;
+    }
+    /// <summary>
     /// SaveBinary(Application.persistentDataPath + "/Mydata.sav");같은 식으로 호출한다.
     /// </summary>
     /// <param name="fileName"></param>
@@ -176,7 +210,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void MakeToItems()
     {
-        Debug.Log("Make!");
         foreach (int code in GameManager.Instance.buyItemKeys)
         {
             Instantiate(GameManager.Instance.itemBox.itemList[code], buyingItemSpown, Quaternion.identity);

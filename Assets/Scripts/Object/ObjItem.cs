@@ -5,23 +5,26 @@ using UnityEngine;
 public class ObjItem : MonoBehaviour {//오브젝트형으로 존재할 아이템에 붙이는 스크립트이다. Item스크립트와 공생한다.
     [HideInInspector]
     public Collider2D naturalColl;//몬스터와의 접촉을 판단할 콜라이더
+    [HideInInspector]
+    public bool isEnable = true;//이 아이템이 Obj상태로 존재하는가?
     private Rigidbody2D rgd;
     private float outSpeed = 10f;
     // Use this for initialization
     void Awake()
     {
         rgd = gameObject.GetComponent<Rigidbody2D>();
-        naturalColl = gameObject.GetComponent<PolygonCollider2D>();
+        naturalColl = gameObject.GetComponent<Collider2D>();
         //오브젝트형으로 존재하고있는 아이템의 컴포넌트들의 정보를 얻는다.
 
     }
     /// <summary>
     /// 인자값에따라 오브젝트를 게임에서 제외시킬지 등장시킬지 결정한다.
     /// </summary>
-    public void EnableObjItem(bool isenable)
+    public void EnableObjItem(bool enable)
     {
-        if (isenable)//아이템을 뱉을때
+        if (enable)//아이템을 뱉을때
         {
+            isEnable = true;
             rgd.drag = 0;
             if (PlayerManager.Player.P_S_S == PlayerManager.PlayerSeeState.SEERIGHT)
             {
@@ -42,7 +45,8 @@ public class ObjItem : MonoBehaviour {//오브젝트형으로 존재할 아이�
         }
         //아이템을 먹을때
         //gameObject.GetComponent<Collider2D>().isTrigger = true;
-        gameObject.transform.position = GameManager.Instance.outerWorld;
+        isEnable = false;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
         rgd.drag = 1000000;//공기저항을 무한대로 늘려 오브젝트가 움직이지 않게한다.
             
     }

@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour {
 
     private Item[] inventory = new Item[5];
     private int nowSelectItem = 0;
-    private int pastSelectItem=0;
+    private int pastSelectItem=1;
 
     /// <summary>
     /// 아이템을 넣을 칸이 있는지 확인하고 아이템을 리스트에 추가한다. 실패시 out형으로 2번째 인잣값의 값을 바꾼다.
@@ -31,8 +31,9 @@ public class Inventory : MonoBehaviour {
                 inventory[i] = item;
                 itemslot[i].sprite = inventory[i].RendererInfo().sprite;
                 
-                if (GameObject.FindGameObjectWithTag("NowItem") == null || PlayerManager.Player.U_A_S!=PlayerManager.UnitActionState.PATTERN)
+                //if (GameObject.FindGameObjectWithTag("NowItem") == null || PlayerManager.Player.U_A_S!=PlayerManager.UnitActionState.PATTERN)
                     //셀렉중인 아이템이 없거나 아이템 사용중이 아닐경우(아이템이 존재할경우) 렌더러를 바꾼다.
+                
                     ChangeItem();
                 break;
             }
@@ -69,6 +70,7 @@ public class Inventory : MonoBehaviour {
     /// </summary>
     public void ChangeItem()
     {
+        
         bool inventoryisnull = true;//인벤토리가 비었는지를 계산하는걸 반복할 필요가 없기 때문에, 함수값으로 이 변수를 사용할 것이다.
         if (inventory[nowSelectItem] != null)
         {
@@ -84,22 +86,28 @@ public class Inventory : MonoBehaviour {
    /// </summary> 
     private void ChangeItemtransform(bool selectItemisnull)
     {
-        if (!selectItemisnull)//셀렉 중인 아이템이 null이 아니라면
+        if (inventory[pastSelectItem] != null)//셀렉 전의 아이템이 있다면
         {
+
+            inventory[pastSelectItem].transform.parent = null;
+            inventory[pastSelectItem].tag = "Item";
+
+            //그 전에 셀렉했던 아이템을 숨긴다.
+            inventory[pastSelectItem].gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            inventory[pastSelectItem].gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+        if (selectItemisnull==false)//셀렉 중인 아이템이 null이 아니라면
+        {
+            
             inventory[nowSelectItem].transform.parent = itemHold.transform;
             inventory[nowSelectItem].tag = "NowItem";
-            inventory[nowSelectItem].transform.localPosition = new Vector2();
-
+            //셀렉한 아이템을 나타낸다.
+            inventory[nowSelectItem].gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            inventory[nowSelectItem].gameObject.GetComponent<Collider2D>().enabled = true;
             if (PlayerManager.Player.P_S_S == PlayerManager.PlayerSeeState.SEERIGHT)//아이템이 거꾸로 되는것을 방지한다.
                 inventory[nowSelectItem].transform.rotation = Quaternion.Euler(0, 0, 0);
             else
                 inventory[nowSelectItem].transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        if (inventory[pastSelectItem] != null)//셀렉 전의 아이템이 있다면
-        {
-            inventory[pastSelectItem].transform.parent = null;
-            inventory[pastSelectItem].tag = "Item";
-            inventory[pastSelectItem].transform.localPosition = GameManager.Instance.outerWorld;//그 전에 셀렉했던 아이템을 숨긴다.*/
         }
     }
 
@@ -120,7 +128,7 @@ public class Inventory : MonoBehaviour {
     /// 마우스 스크롤러에 따라 무엇이 셀렉되고있는지를 위한 '별' 이미지를 이동한다.
     /// </summary>
     /// <param name="isScrollUp"></param>
-    public void ChangeSelectItemRenderer(bool isScrollUp)
+    public void ChangeSelectItemScrollStar(bool isScrollUp)
     {
         if (PlayerManager.Player.U_A_S == Unit.UnitActionState.PATTERN)//아이템을 사용중이라면 다른아이템을 셀렉할 수 없다.
             return;
@@ -148,7 +156,21 @@ public class Inventory : MonoBehaviour {
         selectItemShowImage.rectTransform.position = itemslot[nowSelectItem].rectTransform.position;
         
     }
-    
+
+    /// <summary>
+    /// 별 이미지를 인잣값으로 넣은 숫자 칸으로 이동한다.
+    /// </summary>
+    /// <param name="star"></param>
+    public void ChangeSelectItemKeypadStar(int star)
+    {
+        if (PlayerManager.Player.U_A_S == Unit.UnitActionState.PATTERN)//아이템을 사용중이라면 다른아이템을 셀렉할 수 없다.
+            return;
+        pastSelectItem = nowSelectItem;
+        nowSelectItem = star-1;
+        selectItemShowImage.rectTransform.position = itemslot[nowSelectItem].rectTransform.position;
+
+    }
+
     /// <summary>
     /// 현재 셀렉되고있는 아이템을 반환한다.
     /// </summary>

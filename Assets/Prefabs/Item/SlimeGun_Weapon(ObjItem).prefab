@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1717489710083698}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.6567507, y: -1.6417124, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,7 +80,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.1875, y: 0.3125}
+    oldSize: {x: 1.1953125, y: 0.5}
     newSize: {x: 1.52, y: 0.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -112,9 +112,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemTag: Item
-  itemName: Weapon_SlimeGun
+  itemName: "\uD0B9\uC2AC\uB77C\uC784 \uD559\uC0B4\uC790"
   itemKey: 2
-  itemTooltipText: 'Name : Weapon_Slime Gun tip : Amazing! This is a SlimeGun!?'
+  itemTooltipText: "\uC774\uB984 : \uD0B9\uC2AC\uB77C\uC784 \uD559\uC0B4\uC790 \uC815\uBCF4
+    : \uB300 \uC2AC\uB77C\uC784\uC6A9 \uD559\uC0B4 \uBB34\uAE30\uC785\uB2C8\uB2E4."
   itemDamage: 0
   knockback: 0
   itemUseSoundEffect: {fileID: 8300000, guid: 75a8ebff1de00ee4b964f03a2d60344b, type: 3}
@@ -132,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   naturalColl: {fileID: 0}
+  isEnable: 1
 --- !u!212 &212072006135539840
 SpriteRenderer:
   m_ObjectHideFlags: 1

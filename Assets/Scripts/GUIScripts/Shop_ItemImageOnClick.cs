@@ -16,6 +16,6 @@ public class Shop_ItemImageOnClick : MonoBehaviour {
         itemInfo.itemSprite = gameObject.GetComponent<Image>().sprite;
         itemInfo.itemTip = itemTip;
         itemInfo.itemSpecialText = itemSpecialText;
-        itemInfo.itemPriceText = "Required a "+itemPriceText;
+        itemInfo.itemPriceText = itemPriceText + " 필요" ;
     }
 }

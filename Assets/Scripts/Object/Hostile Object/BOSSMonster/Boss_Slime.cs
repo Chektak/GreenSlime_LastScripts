@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss_Slime : Enemy {
+    public Color isAngryColor;
     private bool canJumpFuntion = true;
     private bool isAngry = false;
     private float jumpCooltime = 3;
@@ -87,6 +88,10 @@ public class Boss_Slime : Enemy {
         if (thisHealth.Health <= thisHealth.healths.Length / 4 && isAngry == false)
         {
             isAngry = true;
+
+            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+            camera.GetComponent<Camera>().backgroundColor = isAngryColor;
+
             jumpCooltime = 1.5f;
             forceConstant *= 3;
             for (int h = 0; h < 6; h++)

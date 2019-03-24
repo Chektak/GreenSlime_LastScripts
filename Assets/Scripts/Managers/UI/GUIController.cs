@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GUIController: MonoBehaviour {
+    public Color mainPanelColor;
     public GameObject escPauseUI;
     public GameObject stageClearPanel;
     public GameObject stageClearFailPanel;
@@ -14,9 +15,9 @@ public class GUIController: MonoBehaviour {
 
     bool CanEscPress()
     {
-        if (stageClearFailPanel.activeSelf || stageClearPanel.activeSelf)
+        if (stageClearFailPanel.activeSelf || stageClearPanel.activeSelf || GameManager.Instance.nowPlayingScnenName == "MainScene")
             return false;//스테이지 클리어나 클리어실패후 나타나는 창에서는 esc가 안먹히게 한다.
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.nowPlayingScnenName != "MainScene")
+        if (Input.GetKeyDown(KeyCode.Escape))
         {//메인씬이 아닌곳(스테이지)에서 esc를 누를시
             return true;
         }
@@ -27,12 +28,14 @@ public class GUIController: MonoBehaviour {
         if (CanEscPress())
         {
             paused = !paused;
+            
         }
         if (paused)
         {
             escPauseUI.SetActive(true);
         }
-        if (!paused) {
+        if (!paused)
+        {
             escPauseUI.SetActive(false);
         }
     }
@@ -54,6 +57,8 @@ public class GUIController: MonoBehaviour {
         GetComponent<SceneChanger>().SceneChange();
         paused = false;
         Time.timeScale = 1;
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        camera.GetComponent<Camera>().backgroundColor = mainPanelColor;
     }
     public void ProgramExit()
     {

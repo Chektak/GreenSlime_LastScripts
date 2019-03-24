@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Events\Touch_CameraBackColor.cs" />
+    <Compile Include="Assets\Scripts\Events\Touch_ObjectActive.cs" />
     <Compile Include="Assets\Scripts\GUIScripts\AudioSettingSlider.cs" />
     <Compile Include="Assets\Scripts\GUIScripts\CoinsUpdate.cs" />
     <Compile Include="Assets\Scripts\GUIScripts\Credit_AutoScroll.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SuperManager.cs" />
     <Compile Include="Assets\Scripts\Managers\UI\GUIController.cs" />
+    <Compile Include="Assets\Scripts\Object\Ground\EndWorld.cs" />
+    <Compile Include="Assets\Scripts\Object\Ground\MovingFloor.cs" />
     <Compile Include="Assets\Scripts\Object\Hostile Object\BOSSMonster\Boss_Slime.cs" />
     <Compile Include="Assets\Scripts\Object\Hostile Object\Enemy.cs" />
     <Compile Include="Assets\Scripts\Object\Hostile Object\Hit_and_damage.cs" />
@@ -86,6 +90,7 @@
     <Compile Include="Assets\Scripts\Object\Item.cs" />
     <Compile Include="Assets\Scripts\Object\Item\Item_HealPosion.cs" />
     <Compile Include="Assets\Scripts\Object\Item\Item_ShieldLeaf.cs" />
+    <Compile Include="Assets\Scripts\Object\Item\Item_Umbrella.cs" />
     <Compile Include="Assets\Scripts\Object\Item\SlimeGun_Bullet.cs" />
     <Compile Include="Assets\Scripts\Object\Item\Weapon_SlimeGun.cs" />
     <Compile Include="Assets\Scripts\Object\Item\Weapon_Stick.cs" />
@@ -97,6 +102,7 @@
     <Compile Include="Assets\Scripts\Object\System Object\GoldCoin.cs" />
     <Compile Include="Assets\Scripts\Object\System Object\HealthDisplay.cs" />
     <Compile Include="Assets\Scripts\Object\System Object\Heart.cs" />
+    <Compile Include="Assets\Scripts\Object\System Object\SmallGoldCoin.cs" />
     <Compile Include="Assets\Scripts\Object\System Object\StageClear.cs" />
     <Compile Include="Assets\Scripts\Object\Unit.cs" />
     <Compile Include="Assets\Scripts\SystemScripts\AutoDestroyEffect.cs" />

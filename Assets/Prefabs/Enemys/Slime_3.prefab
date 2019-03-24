@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceConstant: 300
   dropObject:
-  - {fileID: 1763723071267736, guid: d1335dec652f96a43b9fbb71444a9cda, type: 2}
+  - {fileID: 1408669293597606, guid: f437801fb1d9b7c49965327c2ab368f4, type: 2}
   animator: {fileID: 0}
   rgd: {fileID: 0}
   thisHealth: {fileID: 0}

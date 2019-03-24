@@ -6,6 +6,18 @@ public class Weapon_Stick : Item {
     
     public float attackAngle = 2500f;
     public float attackTime = 1f;
+    protected override void Start()
+    {
+        base.Start();
+    }
+    protected override void Update()
+    {
+        base.Update();
+        if (objItem.isEnable == false) {
+            
+            
+        }
+    }
 
     protected override void UseItem()
     {
@@ -16,15 +28,15 @@ public class Weapon_Stick : Item {
 
     IEnumerator Attack_Stick()
     {
-        int canSoundPlayCount = 13;
+        int canSoundPlayCount = 13;//13프레임마다 사운드를 재생
         float istime = 0;
+        
         while (istime < attackTime)
         {
             gameObject.tag = "Weapon";
             istime += Time.deltaTime;
             PlayerManager.Player.ReturnInventoryscript().itemHold.transform.Rotate(0, 0, -(attackAngle * Time.deltaTime));
-
-            if(canSoundPlayCount==13)
+            if (canSoundPlayCount==13)
             {
                 SuperManager superManager;
                 GameManager.Instance.managers.TryGetValue("SoundManager", out superManager);//GameManager에서 사운드매니저에 대한 정보를 얻는다.
@@ -39,5 +51,10 @@ public class Weapon_Stick : Item {
         OriginalEulerChange();//슈퍼클래스의 본래 상태로 돌아가는 함수를 실행한다.
         
         yield break;
+    }
+
+    private void OnTriggerStay2D(Collider2D coll)
+    {
+        base.TriggerStay2D(coll);
     }
 }

@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1148344418592178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.5, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -124,11 +124,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemTag: Item
-  itemName: Weapon_Stick
+  itemName: "\uB098\uBB34\uB9C9\uB300\uAE30"
   itemKey: 1
-  itemTooltipText: 'Name : Weapon_Stick tip : This is a nice wooden stick.'
+  itemTooltipText: "\uC774\uB984 : \uB9C9\uB300\uAE30 \uC815\uBCF4 : \uD3C9\uBC94\uD55C
+    \uB098\uBB34 \uB9C9\uB300\uAE30 \uC785\uB2C8\uB2E4."
   itemDamage: 1
-  knockback: 0
+  knockback: 500
   itemUseSoundEffect: {fileID: 8300000, guid: 1840782872700934aac8b7b0957d8d45, type: 3}
   attackAngle: 1000
   attackTime: 1
@@ -144,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   naturalColl: {fileID: 0}
+  isEnable: 1
 --- !u!212 &212815213166816694
 SpriteRenderer:
   m_ObjectHideFlags: 1

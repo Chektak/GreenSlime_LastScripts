@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour {
     //플레이어에 대한 입력과 그에 필요한 변수들을 설정하는 책임을 갖는다.
     public float walkSpeed = 4f;
     public float jumpForce = 5f;
+    public AudioClip jumpSound;
     private Rigidbody2D thisrgd = null;
     private Vector3 pos = Vector3.zero;
     private bool isGrounded = false;
@@ -31,6 +32,12 @@ public class PlayerInput : MonoBehaviour {
                     thisrgd.velocity = new Vector2(0.0f, jumpForce);
                     //rigidbody의 y방향에 대한 속도를 직접 바꿔쓴다.
                     isDoubleJumped--;
+                    
+                    //점프 사운드 출력
+                    SuperManager superManager;
+                    GameManager.Instance.managers.TryGetValue("SoundManager", out superManager);//GameManager에서 사운드매니저에 대한 정보를 얻는다.
+                    SoundManager soundManager = superManager.gameObject.GetComponent<SoundManager>();
+                    soundManager.soundEffectSource.PlayOneShot(jumpSound);
                 }
             }//jump
             if (Input.GetKey("w") && isRun == false)
@@ -46,13 +53,38 @@ public class PlayerInput : MonoBehaviour {
             }//runfalse
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
-                player.ReturnInventoryscript().ChangeSelectItemRenderer(true);
-                player.ReturnInventoryscript().ChangeItem();
+                player.ReturnInventoryscript().ChangeSelectItemScrollStar(true);//별 이동
+                player.ReturnInventoryscript().ChangeItem();//아이템 선택
             }
             if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
-                player.ReturnInventoryscript().ChangeSelectItemRenderer(false);
-                player.ReturnInventoryscript().ChangeItem();
+                player.ReturnInventoryscript().ChangeSelectItemScrollStar(false);//별 이동
+                player.ReturnInventoryscript().ChangeItem();//아이템 선택
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                player.ReturnInventoryscript().ChangeSelectItemKeypadStar(1);//별 이동
+                player.ReturnInventoryscript().ChangeItem();//아이템 선택
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                player.ReturnInventoryscript().ChangeSelectItemKeypadStar(2);//별 이동
+                player.ReturnInventoryscript().ChangeItem();//아이템 선택
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                player.ReturnInventoryscript().ChangeSelectItemKeypadStar(3);//별 이동
+                player.ReturnInventoryscript().ChangeItem();//아이템 선택
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                player.ReturnInventoryscript().ChangeSelectItemKeypadStar(4);//별 이동
+                player.ReturnInventoryscript().ChangeItem();//아이템 선택
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                player.ReturnInventoryscript().ChangeSelectItemKeypadStar(5);//별 이동
+                player.ReturnInventoryscript().ChangeItem();//아이템 선택
             }
             if (Input.GetButtonDown("Fire1"))
             {

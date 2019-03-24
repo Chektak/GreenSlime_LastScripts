@@ -3,34 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item_ShieldLeaf : Item {
-
+    public Sprite idleSprite;
+    public Sprite usingSprite;
     bool isUsed = false;
+
     protected override void UseItem()
     {
-        Debug.Log(isUsed);
-        Rigidbody2D thisrgd = GetComponent<Rigidbody2D>();
         if (isUsed == false)
         {
             isUsed = true;
-            thisrgd.constraints = RigidbodyConstraints2D.FreezeAll;
+            base.itemRenderer.sprite = usingSprite;
         }
         else
         {
             isUsed = false;
-            thisrgd.constraints = RigidbodyConstraints2D.None;
+            base.itemRenderer.sprite = idleSprite;
         }
         OriginalEulerChange();
     }
-    private new void OnCollisionEnter2D(Collision2D coll)
+    private void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Enemy")
+        if (isUsed == true)
         {
-            Rigidbody2D rgd = coll.gameObject.GetComponent<Rigidbody2D>();
-            float directionX = transform.position.x - PlayerManager.Player.transform.position.x;
-            Vector2 direction = new Vector2(directionX, 0);
-            direction.Normalize();
-            direction += new Vector2(0, 1.5f);
-            rgd.AddForce(direction * rgd.mass * knockback);
+            base.TriggerStay2D(coll);
         }
     }
 }

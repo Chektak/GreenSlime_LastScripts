@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea768d6fecb14f14db8e403f942b1555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinValue: 10
+  coinValue: 40
   destroySoundEffect: {fileID: 8300000, guid: d58870ceeb2111d458bf27a9cf84432f, type: 3}
 --- !u!212 &212364542116783562
 SpriteRenderer:
